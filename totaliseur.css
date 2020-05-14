@@ -1,0 +1,108 @@
+/*  */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+}
+
+main {
+    text-align: center;
+    border: 1px orchid dotted;
+}
+
+input {
+    font: inherit;
+    text-align: inherit;
+}
+
+.saisie {
+    background-color: beige;
+    /* text-align: right; */
+}
+
+#total {
+    position: fixed;
+    left: 50%;
+    margin-left: -2.5em;
+    background-color: whitesmoke;
+    border: 1px solid navy;
+    width: 5em;
+    text-align: right;
+    z-index: 10;
+}
+
+#ajouter {
+    width: 12em;
+    border-radius: .5em;
+    border: 1px orange solid;
+    margin: .5em;
+}
+
+#grille {
+    border: 1px solid blue;
+    margin: 2em auto auto;
+    /* width: 19em; */
+}
+
+.item {
+    position: relative;
+}
+
+.btn_moins {
+    border-radius: .5em 0 0 .5em;
+    width: 1.6em;
+}
+
+.btn_plus {
+    border-radius: 0 .5em .5em 0;
+    width: 1.6em;
+}
+
+.suppr {
+    color: red;
+    border-radius: .5em;
+    border-style: solid;
+    margin: 0 .5em;
+}
+
+.prix {
+    width: 3.5em;
+    margin: 0 .3em;
+    text-align: right;
+}
+
+.qte {
+    width: 1.2em;
+}
+
+.reduc {
+    width: 1.5em;
+    margin: 0 .3em;
+}
+
+.cout {
+    width: 3.5em;
+    text-align: right;
+}
+
+.detail {
+    visibility: hidden;
+    position: absolute;
+    font-size: smaller;
+    color: blue;
+    background-color: lightyellow;
+    top: -18px;
+    left: 50%;
+    margin-left: 3em;
+    z-index: 20;
+    border: 1px dotted blue;
+    border-radius: .5em;
+    padding: 0 .5em;
+}
+
+.cout:hover + .detail:not(:empty) {
+    visibility: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}

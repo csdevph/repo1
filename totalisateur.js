@@ -18,24 +18,24 @@ document.querySelector('#ajouter').addEventListener('click', ajouter);
 
 function ajouter() {
     // let frag = document.createDocumentFragment();
-    let tr = document.createElement("div");
-    tr.className = "item";
+    let itemRow = document.createElement("div");
+    itemRow.className = "item";
 
-    let td = "";
-    for (const el of ligneArticle) td += el;
-    tr.innerHTML = td;
+    let elems = "";
+    for (const el of ligneArticle) elems += el;
+    itemRow.innerHTML = elems;
 
-    tr.querySelector('.btn_moins').addEventListener('click', decrement);
-    tr.querySelector('.btn_plus').addEventListener('click', increment);
+    itemRow.querySelector('.btn_moins').addEventListener('click', decrement);
+    itemRow.querySelector('.btn_plus').addEventListener('click', increment);
 
-    tr.querySelector('.suppr').addEventListener('click', supprim);
+    itemRow.querySelector('.suppr').addEventListener('click', supprim);
 
-    const inputs = tr.querySelectorAll('.saisie');
+    const inputs = itemRow.querySelectorAll('.saisie');
     for (const el of inputs) {
         el.addEventListener("input", prixTotal)
     }
-    grille.appendChild(tr);
-    tr.querySelector(".prix").focus();
+    grille.appendChild(itemRow);
+    itemRow.querySelector(".prix").focus();
 }
 
 function prixTotal() {
@@ -83,7 +83,7 @@ function increment() {
 }
 
 function supprim() {
-    let tr = this.parentElement;
-    tr.parentElement.removeChild(tr);
+    let itemRow = this.parentElement;
+    itemRow.parentElement.removeChild(itemRow);
     aPayer();
 }

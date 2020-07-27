@@ -1,108 +1,113 @@
 /*  */
 body {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.1em;
-}
-
-main {
+    font-size: 1.5em;
+    margin: 0;
+    background-color: darkgray;
     text-align: center;
-    border: 1px orchid dotted;
 }
 
-input {
+input, button {
     font: inherit;
     text-align: inherit;
+    border: none;
+    padding: 0;
 }
 
-.saisie {
-    background-color: beige;
-    /* text-align: right; */
+button:hover:enabled {
+    background: linear-gradient(darkgray, white);
 }
 
-#total {
-    position: fixed;
-    left: 50%;
-    margin-left: -2.5em;
-    background-color: whitesmoke;
-    border: 1px solid navy;
-    width: 5em;
-    text-align: right;
+header {
+    position: sticky;
+    top: 0;
+    background-color: gold;
+    padding: 5px;
     z-index: 10;
 }
 
-#ajouter {
-    width: 12em;
-    border-radius: .5em;
-    border: 1px orange solid;
-    margin: .5em;
+footer{
+    position: sticky;
+    bottom: 0;
+    background-color: gold;
+    padding: 5px;
+    z-index: 10;
 }
 
-#grille {
-    border: 1px solid blue;
-    margin: 2em auto auto;
-    /* width: 19em; */
+.currency {
+    text-align: right;
+    padding-right: 5px;
+}
+
+#cart_total {
+    background-color: whitesmoke;
+    margin: 0 auto;
+    width: 5em;
+}
+
+#add_item {
+    width: 5em;
+}
+
+#cart_items {
+    margin: 2px auto;   /* centré */
+    width: 14.5em;
 }
 
 .item {
     position: relative;
 }
 
-.btn_moins {
-    border-radius: .5em 0 0 .5em;
-    width: 1.6em;
+.item > * {
+    margin: 2px 1px;
 }
 
-.btn_plus {
-    border-radius: 0 .5em .5em 0;
-    width: 1.6em;
+.item > button {
+    width: 1.5em;
 }
 
-.suppr {
+.item > .btn_remove {
     color: red;
-    border-radius: .5em;
-    border-style: solid;
-    margin: 0 .5em;
 }
 
-.prix {
-    width: 3.5em;
-    margin: 0 .3em;
-    text-align: right;
+.item > .btn_remove:disabled {
+    opacity: 0.3;
 }
 
-.qte {
+.item > .edit {
+    background-color: beige;
+}
+
+.item > .price {
+    width: 2.8em;
+}
+
+.item > .qty {
     width: 1.2em;
 }
 
-.reduc {
+.item > .discount {
     width: 1.5em;
-    margin: 0 .3em;
 }
 
-.cout {
-    width: 3.5em;
-    text-align: right;
+.item > .cost {
+    width: 3.3em;
 }
 
-.detail {
+.item > .detail {
     visibility: hidden;
     position: absolute;
+    top: -1.1em;
+    right: 1.5em;
     font-size: smaller;
     color: blue;
     background-color: lightyellow;
-    top: -18px;
-    left: 50%;
-    margin-left: 3em;
-    z-index: 20;
+    padding: 0 5px;
     border: 1px dotted blue;
     border-radius: .5em;
-    padding: 0 .5em;
+    z-index: 20;
 }
 
-.cout:hover + .detail:not(:empty) {
+.item > .cost:hover + .detail:not(:empty) {
     visibility: visible;
-}
-
-.invisible {
-    visibility: hidden;
 }

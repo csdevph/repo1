@@ -1,0 +1,15 @@
+{
+    "background_color": "purple",
+    "description": "Calculette de courses... en supermarché",
+    "display": "fullscreen",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "name": "Calculette de courses",
+    "short_name": "Calculette",
+    "start_url": "totaliseur.html"
+}

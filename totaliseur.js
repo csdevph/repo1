@@ -99,3 +99,12 @@ function removeItem() {
 for (let index = 0; index < 15; index++) {
     addItem();
 }
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker
+            .register("/repo1/sw.js")
+            .then(reg => console.log("Registration succeeded. Scope is " + reg.scope))
+            .catch(error => alert("Registration failed with " + error));
+    });
+}

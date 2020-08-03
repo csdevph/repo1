@@ -1,5 +1,5 @@
-self.addEventListener('install', function (event) {
-    event.waitUntil(
+self.addEventListener('install', function (evt) {
+    evt.waitUntil(
         caches.open('v1').then(function (cache) {
             return cache.addAll([
                 '/repo1/',
@@ -11,11 +11,12 @@ self.addEventListener('install', function (event) {
     );
 });
 
-self.addEventListener('fetch', function (e) {
-    console.log(e.request.url);
-    e.respondWith(
-        caches.match(e.request).then(function (response) {
-            return response || fetch(e.request);
+self.addEventListener('fetch', function (evt) {
+    console.log(evt.request.url);
+    evt.respondWith(
+        caches.match(evt.request).then(function (response) {
+            // always answering from cache
+            return response || Promise.reject('No match');
         })
     );
 });

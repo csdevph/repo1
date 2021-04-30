@@ -1,7 +1,17 @@
 // 
 const cartItems = document.querySelector("#cart_items");
 const cartTotal = document.querySelector("#cart_total");
-document.querySelector('#add_item').addEventListener('click', addItem);
+document.querySelector('#add_item').addEventListener('click', () => {
+    const lastItem = cartItems.lastElementChild;
+    if (lastItem) {
+        // Pas de nouvelle ligne si la dernière est vide
+        if (lastItem.querySelector('.price').value === "" && lastItem.querySelector('.discount').value === "") {
+            lastItem.querySelector('.price').focus();
+            return;
+        }
+    }
+    addItem();
+});
 document.querySelector('header').addEventListener('click', () => { window.scrollTo(0, 0) });
 document.querySelector('footer').addEventListener('click', () => { window.scrollTo(0, document.body.scrollHeight) });
 
@@ -96,9 +106,7 @@ function removeItem() {
     updateCartPrice();
 }
 
-for (let index = 0; index < 15; index++) {
-    addItem();
-}
+for (let index = 0; index < 15; index++) { addItem() }  // Pour test
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {

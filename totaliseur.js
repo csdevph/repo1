@@ -26,10 +26,10 @@ const newItem = (function () {      // fonction auto-invoquée IIFE et closure
         "<span class='detail'></span>",
         "<button class='btn_remove' type='button'>&times;</button>"
     ]
-    const e = document.createElement("div");
-    e.className = "item";
-    e.innerHTML = itemTags.join("");
-    return () => { return e.cloneNode(true) };    // closure
+    const el = document.createElement("div");
+    el.className = "item";
+    el.innerHTML = itemTags.join("");
+    return () => { return el.cloneNode(true) };    // closure
 })();   // IIFE : ne pas oublier les ()
 
 function addItem() {
@@ -41,7 +41,7 @@ function addItem() {
 
     itemNode.querySelector('.price').addEventListener('input', formatPrice);
     itemNode.querySelectorAll('.edit').forEach(
-        (e) => { e.addEventListener("input", updateItemTotal) }
+        (el) => { el.addEventListener("input", updateItemTotal) }
     );
 
     cartItems.appendChild(itemNode);
@@ -64,7 +64,6 @@ function updateItemTotal() {
         itemRow.querySelector(".detail").textContent = "";
     }
     removeButton.disabled = totalPrice !== 0;
-
     updateCartPrice();
 }
 
@@ -75,21 +74,22 @@ function updateCartPrice() {
         amount += +price.value;
     }
     cartTotal.innerHTML = amount.toFixed(2);
+    save();
 }
 
 function decrementQty() {
-    const e = this.parentElement.querySelector(".qty");
-    if (e.value > 0) {
-        e.value--;
-        e.dispatchEvent(new Event("input"));
+    const el = this.parentElement.querySelector(".qty");
+    if (el.value > 0) {
+        el.value--;
+        el.dispatchEvent(new Event("input"));
     }
 }
 
 function incrementQty() {
-    const e = this.parentElement.querySelector(".qty");
-    if (e.value < 6) {
-        e.value++;
-        e.dispatchEvent(new Event("input"));
+    const el = this.parentElement.querySelector(".qty");
+    if (el.value < 6) {
+        el.value++;
+        el.dispatchEvent(new Event("input"));
     }
 }
 
@@ -106,7 +106,29 @@ function removeItem() {
     updateCartPrice();
 }
 
-for (let index = 0; index < 15; index++) { addItem() }  // Pour test
+function save() {
+    let inputs = Array.from(document.querySelectorAll('.edit'));
+    localStorage.setItem("cart", JSON.stringify(inputs.map(v => v.value)));
+}
+
+function retrieve() {
+    try {
+        const data = JSON.parse(localStorage.getItem("cart"));
+        const dataCount = data.length;      // 3 valeurs par item
+        if (isNaN(dataCount) || dataCount % 3) { throw ("Invalid data") }
+        for (let index = 0; index < dataCount / 3; index++) { addItem() }
+        const inputs = Array.from(document.querySelectorAll('.edit'));
+        for (let index = 0; index < dataCount; index++) {
+            inputs[index].value = data[index];
+        }
+        document.querySelectorAll(".price").forEach((z) => { z.dispatchEvent(new Event("input")) });
+    } catch (error) {
+        console.warn("Local storage.", error);
+        for (let index = 0; index < 10; index++) { addItem() }  // Items disponibles initialement
+    }
+}
+
+retrieve();
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {

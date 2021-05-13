@@ -17,14 +17,14 @@ document.querySelector('footer').addEventListener('click', () => { window.scroll
 
 const newItem = (function () {      // fonction auto-invoquée IIFE et closure
     const itemTags = [
+        "<button class='btn_remove' type='button'>&times;</button>",
         "<button class='btn_minus' type='button'>&minus;</button>",
         "<input class='edit qty' type='text' value='1' readonly>",
         "<button class='btn_plus' type='button'>&plus;</button>",
         "<input class='edit price currency' type='text' inputmode='numeric' maxlength='5'>",
         "<input class='edit discount' type='text' inputmode='numeric' maxlength='2' placeholder='%'>",
         "<input class='cost currency' type='text' value='0.00' readonly>",
-        "<span class='detail'></span>",
-        "<button class='btn_remove' type='button'>&times;</button>"
+        "<span class='detail'></span>"
     ]
     const el = document.createElement("div");
     el.className = "item";

@@ -68,6 +68,8 @@ footer{
 
 .item > .btn_remove {
     color: red;
+    margin-right: 3px;
+    border-radius: .3em;
 }
 
 .item > .btn_remove:disabled {

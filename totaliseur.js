@@ -1,7 +1,13 @@
 // 
 const cartItems = document.querySelector("#cart_items");
 const cartTotal = document.querySelector("#cart_total");
-document.querySelector('#add_item').addEventListener('click', () => {
+const addBtn = document.querySelector("#add_item");
+const clearBtn = document.querySelector("#cart_total+button");
+
+document.querySelector('header').addEventListener('click', () => { window.scrollTo(0, 0) });
+document.querySelector('footer').addEventListener('click', () => { window.scrollTo(0, document.body.scrollHeight) });
+
+addBtn.addEventListener('click', () => {
     const lastItem = cartItems.lastElementChild;
     if (lastItem) {
         // Pas de nouvelle ligne si la dernière est vide
@@ -12,8 +18,7 @@ document.querySelector('#add_item').addEventListener('click', () => {
     }
     addItem();
 });
-document.querySelector('header').addEventListener('click', () => { window.scrollTo(0, 0) });
-document.querySelector('footer').addEventListener('click', () => { window.scrollTo(0, document.body.scrollHeight) });
+clearBtn.addEventListener('click', () => { localStorage.clear(); location.reload() });
 
 const newItem = (function () {      // fonction auto-invoquée IIFE et closure
     const itemTags = [
@@ -73,7 +78,7 @@ function updateCartPrice() {
     for (let price of allPrices) {
         amount += +price.value;
     }
-    cartTotal.innerHTML = amount.toFixed(2);
+    cartTotal.value = amount.toFixed(2);
     save();
 }
 
@@ -124,6 +129,7 @@ function retrieve() {
         document.querySelectorAll(".price").forEach((z) => { z.dispatchEvent(new Event("input")) });
     } catch (error) {
         console.warn("Local storage.", error);
+        cartTotal.value = "0.00";
         for (let index = 0; index < 10; index++) { addItem() }  // Items disponibles initialement
     }
 }

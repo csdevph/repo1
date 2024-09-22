@@ -1,4 +1,4 @@
-// 
+//
 const cartItems = document.querySelector("#cart_items");
 const cartTotal = document.querySelector("#cart_total");
 const addBtn = document.querySelector("#add_item");
@@ -20,7 +20,7 @@ addBtn.addEventListener('click', () => {
 });
 clearBtn.addEventListener('click', () => { localStorage.clear(); location.reload() });
 
-const newItem = (function () {      // fonction auto-invoquée IIFE et closure
+const _newItem = (function () {      // fonction auto-invoquée IIFE et closure
     const itemTags = [
         "<button class='btn_remove' type='button'>&times;</button>",
         "<button class='btn_minus' type='button'>&minus;</button>",
@@ -38,7 +38,7 @@ const newItem = (function () {      // fonction auto-invoquée IIFE et closure
 })();   // IIFE : ne pas oublier les ()
 
 function addItem() {
-    const itemNode = newItem();
+    const itemNode = _newItem();
 
     itemNode.querySelector('.btn_minus').addEventListener('click', decrementQty);
     itemNode.querySelector('.btn_plus').addEventListener('click', incrementQty);
@@ -69,17 +69,17 @@ function updateItemTotal() {
         itemRow.querySelector(".detail").textContent = "";
     }
     removeButton.disabled = totalPrice !== 0;
-    updateCartPrice();
+    _updateCartPrice();
 }
 
-function updateCartPrice() {
+function _updateCartPrice() {
     let amount = 0;
     const allPrices = document.querySelectorAll(".cost");
     for (let price of allPrices) {
         amount += +price.value;
     }
     cartTotal.value = amount.toFixed(2);
-    save();
+    cartItems.dispatchEvent(new Event("revised"));
 }
 
 function decrementQty() {
@@ -108,33 +108,36 @@ function formatPrice() {
 function removeItem() {
     const itemNode = this.parentElement;
     itemNode.parentElement.removeChild(itemNode);
-    updateCartPrice();
+    _updateCartPrice();
 }
 
-function save() {
-    let inputs = Array.from(document.querySelectorAll('.edit'));
-    localStorage.setItem("cart", JSON.stringify(inputs.map(v => v.value)));
-}
+const Histo = {
+    save() {
+        let inputs = Array.from(document.querySelectorAll('.edit'));
+        localStorage.setItem("cart", JSON.stringify(inputs.map(v => v.value)));
+    },
 
-function retrieve() {
-    try {
-        const data = JSON.parse(localStorage.getItem("cart"));
-        const dataCount = data.length;      // 3 valeurs par item
-        if (isNaN(dataCount) || dataCount % 3) { throw ("Invalid data") }
-        for (let index = 0; index < dataCount / 3; index++) { addItem() }
-        const inputs = Array.from(document.querySelectorAll('.edit'));
-        for (let index = 0; index < dataCount; index++) {
-            inputs[index].value = data[index];
+    retrieve() {
+        try {
+            const data = JSON.parse(localStorage.getItem("cart"));
+            const dataCount = data.length;      // 3 valeurs par item
+            if (isNaN(dataCount) || dataCount % 3) { throw ("Invalid data") }
+            for (let index = 0; index < dataCount / 3; index++) { addItem() }
+            const inputs = Array.from(document.querySelectorAll('.edit'));
+            for (let index = 0; index < dataCount; index++) {
+                inputs[index].value = data[index];
+            }
+            document.querySelectorAll(".price").forEach((z) => { z.dispatchEvent(new Event("input")) });
+        } catch (error) {
+            console.warn("Local storage.", error);
+            cartTotal.value = "0.00";
+            for (let index = 0; index < 10; index++) { addItem() }  // Items disponibles initialement
         }
-        document.querySelectorAll(".price").forEach((z) => { z.dispatchEvent(new Event("input")) });
-    } catch (error) {
-        console.warn("Local storage.", error);
-        cartTotal.value = "0.00";
-        for (let index = 0; index < 10; index++) { addItem() }  // Items disponibles initialement
     }
 }
 
-retrieve();
+Histo.retrieve();
+cartItems.addEventListener('revised', Histo.save);
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {

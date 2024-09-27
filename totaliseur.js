@@ -15,7 +15,7 @@ const Numboard = {
         document.querySelector('footer').addEventListener('click', () => { window.scrollTo(0, document.body.scrollHeight) });
 
         this.addBtn.addEventListener('click', () => {
-            const lastItem = cartItems.lastElementChild;
+            const lastItem = this.cartItems.lastElementChild;
             if (lastItem) {
                 // Pas de nouvelle ligne si la dernière est vide
                 if (lastItem.querySelector('.price').value === "" && lastItem.querySelector('.discount').value === "") {
@@ -35,8 +35,8 @@ const Numboard = {
                 "<button class='btn_minus' type='button'>&minus;</button>",
                 "<input class='edit qty' type='text' value='1' readonly>",
                 "<button class='btn_plus' type='button'>&plus;</button>",
-                "<input class='edit price currency' type='text' inputmode='numeric' maxlength='5'>",
-                "<input class='edit discount' type='text' inputmode='numeric' maxlength='2' placeholder='%'>",
+                "<input class='edit use-keyboard price currency' type='text' inputmode='numeric' maxlength='5'>",
+                "<input class='edit use-keyboard discount' type='text' inputmode='numeric' maxlength='2' placeholder='%'>",
                 "<input class='cost currency' type='text' value='0.00' readonly>",
                 "<span class='detail'></span>"
             ]
@@ -118,7 +118,7 @@ const Numboard = {
     removeItem() {
         const itemNode = this.parentElement;
         itemNode.parentElement.removeChild(itemNode);
-        _updateCartPrice();
+        Numboard._updateCartPrice();
     }
 }
 

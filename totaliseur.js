@@ -14,17 +14,16 @@ const Numboard = {
         document.querySelector('header').addEventListener('click', () => { window.scrollTo(0, 0) });
         document.querySelector('footer').addEventListener('click', () => { window.scrollTo(0, document.body.scrollHeight) });
 
-        this.addBtn.addEventListener('click', () => {
+        this.addBtn.addEventListener('click', (e) => {
             const lastItem = this.cartItems.lastElementChild;
-            if (lastItem) {
-                // Pas de nouvelle ligne si la dernière est vide
-                if (lastItem.querySelector('.price').value === "" && lastItem.querySelector('.discount').value === "") {
-                    lastItem.querySelector('.price').focus();
-                    return;
-                }
-            }
-            this.addItem();
+            if (!lastItem
+                || lastItem.querySelector('.price').value !== ""
+                || lastItem.querySelector('.discount').value !== "") this.addItem();
+
+            this.cartItems.lastElementChild.querySelector('.price').click();
+            e.stopPropagation();
         });
+
         this.clearBtn.addEventListener('click', () => { localStorage.clear(); location.reload() });
     },
 
@@ -60,7 +59,6 @@ const Numboard = {
         );
 
         this.cartItems.appendChild(itemNode);
-        itemNode.querySelector(".price").focus();
     },
 
     updateItemTotal() {

@@ -20,6 +20,7 @@ const Numboard = {
                 || lastItem.querySelector('.price').value !== ""
                 || lastItem.querySelector('.discount').value !== "") this.addItem();
 
+            this.cartItems.lastElementChild.querySelector('.price').focus();
             this.cartItems.lastElementChild.querySelector('.price').click();
             e.stopPropagation();
         });
@@ -150,7 +151,7 @@ Histo.retrieve();
 Numboard.cartItems.addEventListener('revised', Histo.save);
 
 if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
+    window.addEventListener("load", () => {
         navigator.serviceWorker
             .register("/repo1/sw.js")
             // .then(reg => console.log("Registration succeeded. Scope is " + reg.scope))

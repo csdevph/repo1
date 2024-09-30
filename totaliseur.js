@@ -2,30 +2,28 @@
 const Numboard = {
     cartItems: null,
     cartTotal: null,
-    addBtn: null,
     clearBtn: null,
 
     init() {
         this.cartItems = document.querySelector("#cart_items");
         this.cartTotal = document.querySelector("#cart_total");
-        this.addBtn = document.querySelector("#add_item");
         this.clearBtn = document.querySelector("#cart_total+button");
 
         document.querySelector('header').addEventListener('click', () => { window.scrollTo(0, 0) });
         document.querySelector('footer').addEventListener('click', () => { window.scrollTo(0, document.body.scrollHeight) });
 
-        this.addBtn.addEventListener('click', (e) => {
-            const lastItem = this.cartItems.lastElementChild;
-            if (!lastItem
-                || lastItem.querySelector('.price').value !== ""
-                || lastItem.querySelector('.discount').value !== "") this.addItem();
-
-            this.cartItems.lastElementChild.querySelector('.price').focus();
-            this.cartItems.lastElementChild.querySelector('.price').click();
-            e.stopPropagation();
-        });
-
         this.clearBtn.addEventListener('click', () => { localStorage.clear(); location.reload() });
+    },
+
+    addItemHandler(e) {
+        const lastItem = Numboard.cartItems.lastElementChild;
+        if (!lastItem
+            || lastItem.querySelector('.price').value !== ""
+            || lastItem.querySelector('.discount').value !== "") Numboard.addItem();
+
+        Numboard.cartItems.lastElementChild.querySelector('.price').focus();
+        Numboard.cartItems.lastElementChild.querySelector('.price').click();
+        e.stopPropagation();
     },
 
     _newItem:

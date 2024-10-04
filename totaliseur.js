@@ -31,10 +31,10 @@ const Numboard = {
             const itemTags = [
                 "<button class='btn_remove' type='button'>&times;</button>",
                 "<button class='btn_minus' type='button'>&minus;</button>",
-                "<input class='edit qty' type='text' value='1' readonly>",
+                "<input class='edit use-keyboard qty' type='text' value='1' readonly maxlength='1'>",
                 "<button class='btn_plus' type='button'>&plus;</button>",
                 "<input class='edit use-keyboard price currency' type='text' inputmode='numeric' maxlength='5'>",
-                "<input class='edit use-keyboard discount' type='text' inputmode='numeric' maxlength='2' placeholder='%'>",
+                "<input class='edit use-keyboard discount' type='text' inputmode='numeric' maxlength='5' placeholder='%'>",
                 "<input class='cost currency' type='text' value='0.00' readonly>",
                 "<span class='detail'></span>"
             ]

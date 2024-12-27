@@ -10,7 +10,7 @@ const Numboard = {
         this.clearBtn = document.querySelector("#cart_total+button");
 
         document.querySelector('header').addEventListener('click', () => { window.scrollTo(0, 0) });
-        document.querySelector('footer').addEventListener('click', () => { window.scrollTo(0, document.body.scrollHeight) });
+        // document.querySelector('footer').addEventListener('click', () => { window.scrollTo(0, document.body.scrollHeight) });
 
         this.clearBtn.addEventListener('click', () => { localStorage.clear(); location.reload() });
     },
@@ -143,10 +143,6 @@ const Histo = {
         }
     }
 }
-
-Numboard.init();
-Histo.retrieve();
-Numboard.cartItems.addEventListener('revised', Histo.save);
 
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {

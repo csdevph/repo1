@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="totaliseur.css">
     <script src="onscreen-keyboard.js"></script>
+    <script src="totaliseur.js"></script>
     <title>Totalisateur</title>
     <link rel="manifest" href="manifest.json">
 </head>
@@ -16,13 +17,19 @@
         <input type="text" id="cart_total" class="currency" value="0.00" readonly>
         <button>Vider</button>
     </header>
-    <div id="cart_items"></div>
+    <div id="cart_items">
+        <script>
+            Numboard.init();
+            Histo.retrieve();
+            Numboard.cartItems.addEventListener('revised', Histo.save);
+        </script>
+    </div>
     <footer>
-        <button id="add_item">&plus;</button>
+        <script>
+            Keyboard.init('#cart_items');
+            Keyboard.functionKeyHandler = Numboard.addItemHandler;
+        </script>
     </footer>
-    <script src="totaliseur.js"></script>
-    <script>Keyboard.functionKeyHandler = Numboard.addItemHandler</script>
-    <script>Keyboard.init('#cart_items')</script>
 </body>
 
 </html>

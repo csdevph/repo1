@@ -5,29 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="output.css">
-    <link rel="stylesheet" href="totaliseur.css">
+    <!-- <link rel="stylesheet" href="totaliseur.css"> -->
     <script src="onscreen-keyboard.js"></script>
     <script src="totaliseur.js"></script>
     <title>Totalisateur</title>
     <link rel="manifest" href="manifest.json">
 </head>
 
-<body>
-    <header>
+<body class="text-center font-mono text-lg">
+    <header class="group relative *:h-full text-center h-[6vh] bg-orange-400">
         <input type="text" id="cart_total" class="currency" value="0.00" readonly>
-        <button>Vider</button>
+        <button class="invisible absolute left-1 group-focus-within:visible"></button>
     </header>
-    <div id="cart_items">
+    <div id="cart_items" class="h-[74vh] overflow-y-scroll">
         <script>
             Numboard.init();
+            Numboard.clearBtn.innerHTML = createIconHTML("delete");
             Histo.retrieve();
             Numboard.cartItems.addEventListener('revised', Histo.save);
         </script>
     </div>
-    <footer>
+    <footer class="h-[20vh]">
         <script>
-            Keyboard.init('#cart_items');
             Keyboard.functionKeyHandler = Numboard.addItemHandler;
+            Keyboard.init('#cart_items');
         </script>
     </footer>
 </body>

@@ -13,9 +13,10 @@
 </head>
 
 <body class="text-center font-mono text-lg">
-    <header class="group relative right-0 h-[6vmax] bg-orange-400 text-center *:h-full landscape:fixed landscape:w-1/2">
+    <header
+        class="group relative right-0 h-[6vmax] py-1 bg-orange-400 text-center *:h-full landscape:fixed landscape:w-1/2">
         <input type="text" id="cart_total" class="currency" value="0.00" readonly>
-        <button class="invisible absolute left-1 group-focus-within:visible"></button>
+        <button class="invisible absolute left-1 top-0 group-focus-within:visible"></button>
     </header>
     <div id="cart_items" class="h-[74vmax] overflow-y-scroll landscape:h-screen landscape:w-1/2">
         <script>
@@ -25,7 +26,7 @@
             Numboard.cartItems.addEventListener('revised', Histo.save);
         </script>
     </div>
-    <footer class="bottom-0 right-0 h-[20vmax] landscape:fixed landscape:w-1/2">
+    <footer class="bottom-0 right-0 h-[20vmax] pb-1 landscape:fixed landscape:w-1/2">
         <script>
             Keyboard.functionKeyHandler = Numboard.addItemHandler;
             Keyboard.init('#cart_items');

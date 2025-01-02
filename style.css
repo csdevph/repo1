@@ -1,3 +1,67 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input:active{
+    outline: auto;
+}
+
+.currency {
+    text-align: right;
+    padding-right: 5px;
+}
+
+.item {
+    position: relative;     /* for tooltip */
+}
+
+.item>* {
+    margin: 2px 1px;
+}
+
+.item>.btn_remove {
+    margin-right: 3px;
+    border-radius: .3em;
+}
+
+.item>.btn_remove:disabled {
+    opacity: 0.3;
+}
+
+.item>.edit {
+    background-color: beige;
+}
+
+.item>.price {
+    width: 3.2em;
+}
+
+.item>.qty {
+    width: 1.2em;
+}
+
+.item>.discount {
+    width: 2.8em;
+}
+
+.item>.cost {
+    width: 3.8em;
+}
+
+.item>.detail {
+    visibility: hidden;
+    position: absolute;
+    top: -1.1em;
+    right: 1.5em;
+    font-size: smaller;
+    color: blue;
+    background-color: lightyellow;
+    padding: 0 5px;
+    border: 1px dotted blue;
+    border-radius: .5em;
+    z-index: 20;
+}
+
+.item>.cost:hover+.detail:not(:empty) {
+    visibility: visible;
+}

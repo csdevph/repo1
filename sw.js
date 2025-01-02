@@ -1,11 +1,13 @@
 self.addEventListener('install', function (evt) {
     evt.waitUntil(
-        caches.open('v1').then(function (cache) {
+        caches.open('v2').then(function (cache) {
             return cache.addAll([
                 '/repo1/',
                 '/repo1/totaliseur.html',
-                '/repo1/totaliseur.css',
-                '/repo1/totaliseur.js'
+                '/repo1/output.css',
+                '/repo1/sprite.svg',
+                '/repo1/totaliseur.js',
+                '/repo1/onscreen-keyboard.js'
             ]);
         })
     );

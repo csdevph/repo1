@@ -28,18 +28,17 @@ const Numboard = {
 
     _newItem:
         (function () {      // fonction auto-invoquée IIFE et closure
+            const ico = "<svg class='fill-red-600 size-6 m-auto'><use href='sprite.svg#clear'></use></svg>";
             const itemTags = [
-                "<button class='btn_remove' type='button'>&times;</button>",
-                "<button class='btn_minus' type='button'>&minus;</button>",
+                "<button class='btn_remove' type='button'>" + ico + "</button>",
                 "<input class='edit use-keyboard qty' type='text' value='1' readonly maxlength='1'>",
-                "<button class='btn_plus' type='button'>&plus;</button>",
                 "<input class='edit use-keyboard price currency' type='text' inputmode='numeric' maxlength='5'>",
                 "<input class='edit use-keyboard discount' type='text' inputmode='numeric' maxlength='5' placeholder='%'>",
                 "<input class='cost currency' type='text' value='0.00' readonly>",
                 "<span class='detail'></span>"
             ]
             const el = document.createElement("div");
-            el.className = "item";
+            el.className = "item flex justify-center";
             el.innerHTML = itemTags.join("");
             return () => { return el.cloneNode(true) };    // closure
         })()    // IIFE : ne pas oublier les ()
@@ -48,8 +47,6 @@ const Numboard = {
     addItem() {
         const itemNode = this._newItem();
 
-        itemNode.querySelector('.btn_minus').addEventListener('click', this.decrementQty);
-        itemNode.querySelector('.btn_plus').addEventListener('click', this.incrementQty);
         itemNode.querySelector('.btn_remove').addEventListener('click', this.removeItem);
 
         itemNode.querySelector('.price').addEventListener('input', this.formatPrice);

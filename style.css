@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-input:active{
+input:focus{
     outline: auto;
 }
 

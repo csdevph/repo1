@@ -68,7 +68,7 @@ const Numboard = {
 
         itemRow.querySelector(".cost").value = costPrice.toFixed(2);
         if (priceCut !== 0) {
-            itemRow.querySelector(".detail").textContent = totalPrice.toFixed(2) + " - " + priceCut.toFixed(2);
+            itemRow.querySelector(".detail").textContent = totalPrice.toFixed(2) + "-" + priceCut.toFixed(2);
         } else {
             itemRow.querySelector(".detail").textContent = "";
         }

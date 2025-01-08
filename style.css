@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 input:focus {
-    outline-width: 1px;
-    outline-color: yellow;
+    outline: auto;
 }
 
 .currency {
@@ -39,10 +38,12 @@ input:focus {
 
 .item>.qty {
     width: 1.2em;
+    text-align: center;
 }
 
 .item>.discount {
     width: 2.8em;
+    text-align: center;
 }
 
 .item>.cost {

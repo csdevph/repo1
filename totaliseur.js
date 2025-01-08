@@ -60,8 +60,10 @@ const Numboard = {
     updateItemTotal() {
         const itemRow = this.parentElement;
         const removeButton = itemRow.querySelector('.btn_remove');
-        const qty = +itemRow.querySelector(".qty").value;
-        const totalPrice = +itemRow.querySelector(".price").value * qty;
+        let qty = itemRow.querySelector(".qty").value;
+        if (isNaN(parseInt(qty))) qty = 1;
+        const price = +itemRow.querySelector(".price").value;
+        const totalPrice = price * qty;
         const discountRate = +itemRow.querySelector(".discount").value / 100;
         const priceCut = +(totalPrice * discountRate).toFixed(2);
         const costPrice = totalPrice - priceCut;
@@ -84,22 +86,6 @@ const Numboard = {
         }
         this.cartTotal.value = amount.toFixed(2);
         this.cartItems.dispatchEvent(new Event("revised"));
-    },
-
-    decrementQty() {
-        const el = this.parentElement.querySelector(".qty");
-        if (el.value > 0) {
-            el.value--;
-            el.dispatchEvent(new Event("input"));
-        }
-    },
-
-    incrementQty() {
-        const el = this.parentElement.querySelector(".qty");
-        if (el.value < 6) {
-            el.value++;
-            el.dispatchEvent(new Event("input"));
-        }
     },
 
     formatPrice() {

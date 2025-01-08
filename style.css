@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-input:focus{
+input:focus {
     outline-width: 1px;
     outline-color: yellow;
 }
@@ -63,10 +63,20 @@ input:focus{
     z-index: 20;
 }
 
-.item:first-of-type>.detail{
+.item:first-of-type>.detail {
     top: 1.4em;
-  }
-  
-.item>.cost:hover+.detail:not(:empty) {
-    visibility: visible;
+}
+
+@keyframes showTip {
+    from {
+        visibility: visible;
+    }
+
+    to {
+        visibility: hidden;
+    }
+}
+
+.item>.cost:focus+.detail:not(:empty) {
+    animation: showTip 3s;
 }

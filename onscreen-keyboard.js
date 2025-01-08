@@ -85,6 +85,7 @@ const Keyboard = {
         });
 
         if (!this.selectedTarget) return;
+        this.selectedTarget.focus();
         this.selectedTarget.dispatchEvent(evt);
     },
 
